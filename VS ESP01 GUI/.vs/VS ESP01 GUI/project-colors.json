@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "52dab847-01b3-4781-9479-caf8c59f4781": {
+      "ProjectGuid": "52dab847-01b3-4781-9479-caf8c59f4781",
+      "DisplayName": "VS ESP01 GUI",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
