@@ -90,6 +90,7 @@ namespace VS_ESP01_GUI
         {
             WebClient client = new WebClient();
 
+            //ThingSpeakData.Text = client.DownloadString("http://api.thingspeak.com/channels/1503667/feed.json");
             label1.Text = client.DownloadString("http://api.thingspeak.com/channels/1503667/field/field1/last.text");
         }
 
@@ -112,10 +113,38 @@ namespace VS_ESP01_GUI
                     const string WRITEKEY = "H1R0O90R97HW8O8V";
                     string strUpdateBase = "http://api.thingspeak.com/update";
                     string strUpdateURI = strUpdateBase + "?api_key=" + WRITEKEY;
+
                     string strField1 = textBox1.Text;
+                    // string strField2 = "42";
                     HttpWebRequest ThingsSpeakReq;
                     HttpWebResponse ThingsSpeakResp;
                     strUpdateURI += "&field1=" + strField1;
+                    /*if (flag_sensor == 11)
+                    {
+                        strUpdateURI += "&field1=" + strField1;
+
+
+                    }
+                    else if (flag_sensor == 12)
+                    {
+                        strUpdateURI += "&field2=" + strField1;
+
+                    }
+                    else if (flag_sensor == 13)
+                    {
+                        strUpdateURI += "&field3=" + strField1;
+
+                    }
+                    else if (flag_sensor == 14)
+                    {
+                        strUpdateURI += "&field4=" + strField1;
+
+                    }
+                    else
+                    {
+
+                    }*/
+
 
                     flag_sensor++;
                     ThingsSpeakReq = (HttpWebRequest)WebRequest.Create(strUpdateURI);
@@ -129,6 +158,7 @@ namespace VS_ESP01_GUI
                 }
                 catch (Exception ex)
                 {
+
                 }
                 textBox1.Text = "";
                 serialPort1.Open();
