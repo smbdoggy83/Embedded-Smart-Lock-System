@@ -67,7 +67,7 @@ namespace VS_ESP01_GUI
 
         private void SerialStart_Click(object sender, EventArgs e)
         {
-            serialPort1.PortName = "COM6";
+            serialPort1.PortName = portName;
             serialPort1.BaudRate = 9600;
             serialPort1.Open();
             if (serialPort1.IsOpen)
@@ -109,7 +109,7 @@ namespace VS_ESP01_GUI
                       {
                           flag_sensor = 10;
                       }*/
-                    const string WRITEKEY = "3RL1K710Z99NAPPH";
+                    const string WRITEKEY = "H1R0O90R97HW8O8V";
                     string strUpdateBase = "http://api.thingspeak.com/update";
                     string strUpdateURI = strUpdateBase + "?api_key=" + WRITEKEY;
                     string strField1 = textBox1.Text;
