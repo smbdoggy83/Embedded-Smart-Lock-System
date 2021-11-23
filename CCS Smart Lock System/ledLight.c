@@ -8,13 +8,13 @@
 #include <msp430.h>
 #define RedLED BIT6
 #define GreenLED BIT0
-#define BUTTON BIT3
+#define BUTTON BIT4
 
 int data = 0;
 
 void uart_init(void);
 
-void ledLight(void)
+void main(void)
 {
     WDTCTL = WDTPW | WDTHOLD;   // stop watchdog timer
 
