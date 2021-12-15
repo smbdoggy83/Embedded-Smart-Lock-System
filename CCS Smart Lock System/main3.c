@@ -5,7 +5,7 @@
  *      Author: Seth
  */
 
-/*
+
 #include <msp430.h>
 
 int main(void)
@@ -31,4 +31,4 @@ int main(void)
     }
     //return 0; //this won't execute normally
 }
-*/
+

@@ -25,11 +25,6 @@ namespace VS_ESP01_GUI
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             if (serialPort1.IsOpen)
@@ -39,26 +34,6 @@ namespace VS_ESP01_GUI
         }
 
 
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -91,7 +66,7 @@ namespace VS_ESP01_GUI
             WebClient client = new WebClient();
 
             //ThingSpeakData.Text = client.DownloadString("http://api.thingspeak.com/channels/1503667/feed.json");
-            label1.Text = client.DownloadString("http://api.thingspeak.com/channels/1503667/field/field1/last.text");
+            label1.Text = client.DownloadString("http://api.thingspeak.com/channels/1563202/field/field1/last.text");
         }
 
         private void Current_data_Click(object sender, EventArgs e)

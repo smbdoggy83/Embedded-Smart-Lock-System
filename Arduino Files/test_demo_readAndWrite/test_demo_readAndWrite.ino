@@ -3,11 +3,12 @@
 #include <Wire.h>
 #include <SPI.h>
 
-// USING ROWANSECURE
 char ssid[] = "RowanWiFi"; // replace MySSID with your WiFi network name
 char pass[] = ""; //replace MyPASS with your WiFi network password
 unsigned long myChannelNumber = 1563202; // replace 0000000 with your channel number
 const char * myWriteAPIKey = "H1R0O90R97HW8O8V"; // replace MyAPIKEY with your thingspeak write API key
+const char * myReadAPIKey = "YB59CV1CV30WXQSN";
+const int FieldNumber2 = 2;
 
 // Create WiFi client and ThingSpeak class.
 WiFiClient client;
@@ -113,4 +114,23 @@ void loop()
   // Wait 15.5 seconds to update the channel again since ThingSpeak is rate limited.
   // You can only upload data every 15 seconds.
   delay(15500);
+}
+
+void readSensor2(void)
+{
+ //------------------- Read Channel 2 ----------------//
+
+  long temp = ts.readLongField(myChannelNumber, FieldNumber2, myReadAPIKey);
+  int statusCode = ts.getLastReadStatus();
+  if (statusCode == 500)
+  {
+    Serial.print("Temperature: ");
+    Serial.println(temp);
+  }
+  else
+  {
+    Serial.println("Unable to read channel / No internet connection");
+  }
+  delay(100);
+  //----------------------------------------------//
 }

@@ -1,4 +1,3 @@
-/*
 #include <msp430.h> 
 #define LED BIT0
 #define UART_RX BIT1
@@ -44,5 +43,5 @@ void main(void)
 	}
 
 }
-*/
+
 

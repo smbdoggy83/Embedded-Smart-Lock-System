@@ -1,0 +1,11 @@
+C:\Users\Seth\Documents\GitHub\Embedded-Smart-Lock-System\VS ESP01 GUI\bin\Debug\VS ESP01 GUI.exe.config
+C:\Users\Seth\Documents\GitHub\Embedded-Smart-Lock-System\VS ESP01 GUI\bin\Debug\VS ESP01 GUI.exe
+C:\Users\Seth\Documents\GitHub\Embedded-Smart-Lock-System\VS ESP01 GUI\bin\Debug\VS ESP01 GUI.pdb
+C:\Users\Seth\Documents\GitHub\Embedded-Smart-Lock-System\VS ESP01 GUI\obj\Debug\VS ESP01 GUI.csproj.AssemblyReference.cache
+C:\Users\Seth\Documents\GitHub\Embedded-Smart-Lock-System\VS ESP01 GUI\obj\Debug\VS ESP01 GUI.csproj.SuggestedBindingRedirects.cache
+C:\Users\Seth\Documents\GitHub\Embedded-Smart-Lock-System\VS ESP01 GUI\obj\Debug\VS_ESP01_GUI.Form1.resources
+C:\Users\Seth\Documents\GitHub\Embedded-Smart-Lock-System\VS ESP01 GUI\obj\Debug\VS_ESP01_GUI.Properties.Resources.resources
+C:\Users\Seth\Documents\GitHub\Embedded-Smart-Lock-System\VS ESP01 GUI\obj\Debug\VS ESP01 GUI.csproj.GenerateResource.cache
+C:\Users\Seth\Documents\GitHub\Embedded-Smart-Lock-System\VS ESP01 GUI\obj\Debug\VS ESP01 GUI.csproj.CoreCompileInputs.cache
+C:\Users\Seth\Documents\GitHub\Embedded-Smart-Lock-System\VS ESP01 GUI\obj\Debug\VS ESP01 GUI.exe
+C:\Users\Seth\Documents\GitHub\Embedded-Smart-Lock-System\VS ESP01 GUI\obj\Debug\VS ESP01 GUI.pdb

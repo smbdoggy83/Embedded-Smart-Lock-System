@@ -3,11 +3,12 @@
 #include <Wire.h>
 #include <SPI.h>
 
-// USING ROWANSECURE
 char ssid[] = "RowanWiFi"; // replace MySSID with your WiFi network name
 char pass[] = ""; //replace MyPASS with your WiFi network password
 unsigned long myChannelNumber = 1563202; // replace 0000000 with your channel number
 const char * myWriteAPIKey = "H1R0O90R97HW8O8V"; // replace MyAPIKEY with your thingspeak write API key
+const char * myReadAPIKey = "YB59CV1CV30WXQSN";
+unsigned int doorFieldNumber = 1;
 
 // Create WiFi client and ThingSpeak class.
 WiFiClient client;
@@ -51,13 +52,25 @@ void setup()
 // Loop runs constantly
 void loop() 
 {
+    
   //If not connected, connect to wifi
   if (WiFi.status() != WL_CONNECTED) 
   {
     init_WIFI();
   }
   
-  int newByte = 0; // incoming byte from serial input
+  writeDoorData();
+  readDoorChannel();
+  
+  // Wait 15.5 seconds to update the channel again since ThingSpeak is rate limited.
+  // You can only upload data every 15 seconds.
+  delay(15500);
+}
+
+//----- Write and Read Data Methods ------//
+ 
+void writeDoorData() {
+    int newByte = 0; // incoming byte from serial input
   char c; //Variable to hold incoming character
   String output = ""; //Variable to hold the concatanated string
 
@@ -109,8 +122,22 @@ void loop()
     Serial.println("Problem setting Field 1. HTTP error code " +
     String(code));
   }
+}
+
+void readDoorChannel(void) {
+
+  int statusCode = 0;
   
-  // Wait 15.5 seconds to update the channel again since ThingSpeak is rate limited.
-  // You can only upload data every 15 seconds.
-  delay(15500);
+ // Read in field 1 of the private channel which is a counter  
+ long doorSignal = ts.readLongField(myChannelNumber, doorFieldNumber, myReadAPIKey);  
+
+  // Check the status of the read operation to see if it was successful
+ statusCode = ts.getLastReadStatus();
+ if(statusCode == 200){
+   Serial.println("Counter: " + String(doorSignal));
+ }
+ else{
+   Serial.println("Problem reading channel. HTTP error code " + String(statusCode)); 
+ }
+
 }
