@@ -1,10 +1,3 @@
-/*
- * ledLight2.c
- *
- *  Created on: Dec 12, 2021
- *      Author: Seth
- */
-
 #include <msp430.h>
 
 // INPUTS
@@ -14,7 +7,7 @@
 // OUTPUTS
 //#define LED BIT0    // Green LED
 #define EMLOCK BIT5   // Electromagnetic Lock
-#define GREENLED BIT6
+//#define GREENLED BIT6
 
 // VARIABLES
 
@@ -43,6 +36,7 @@ void main(void)
     uart_init();
 
     _enable_interrupts(); // enable all interrupts
+    __bis_SR_register(LPM0_bits + GIE);                                       // Enter LPM0 w/ interrupt
     while(1); // wait for an interrupt, don't exit program
 }
 
@@ -53,7 +47,7 @@ void uart_init(void){
     UCA0CTL1 |= UCSSEL_2; // UART Clock -> SMCLK
     UCA0BR0 = 8; // 1MHz / 115200 baud rate = 8
     UCA0BR1 = 0; // 1MHz / 115200 baud rate = 8
-    UCA0MCTL = UCBRS1; // Modulation UCBRSx = 1 MESS WITH THIS
+    UCA0MCTL = UCBRS1; // Modulation UCBRSx = 1
     /* Take UCA0 out of reset */
     UCA0CTL1 &= ~UCSWRST; // **Initialize USCI state machine**
     IE2 |= UCA0RXIE; //Enable USCI_A0 RX interrupt

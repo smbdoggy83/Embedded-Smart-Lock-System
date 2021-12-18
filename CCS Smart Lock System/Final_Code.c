@@ -1,10 +1,3 @@
-/*
- * ledLight2.c
- *
- *  Created on: Dec 12, 2021
- *      Author: Seth
- */
-
 #include <msp430.h>
 
 // INPUTS
@@ -14,7 +7,7 @@
 // OUTPUTS
 //#define LED BIT0    // Green LED
 #define EMLOCK BIT5   // Electromagnetic Lock
-#define GREENLED BIT6
+//#define GREENLED BIT6
 
 // VARIABLES
 
@@ -43,7 +36,7 @@ void main(void)
     uart_init();
 
     _enable_interrupts(); // enable all interrupts
-    __bis_SR_register(LPM0_bits + GIE);                                       // Enter LPM0 w/ interrupt
+    __bis_SR_register(LPM0_bits + GIE); // Enter LPM0 w/ interrupt
     while(1); // wait for an interrupt, don't exit program
 }
 
@@ -51,13 +44,13 @@ void uart_init(void){
 
     UCA0CTL1 = UCSWRST;     // Place UCA0 in Reset to be configured
     /* Baud Rate configuration */
-    UCA0CTL1 |= UCSSEL_2; // UART Clock -> SMCLK
-    UCA0BR0 = 8; // 1MHz / 115200 baud rate = 8
-    UCA0BR1 = 0; // 1MHz / 115200 baud rate = 8
-    UCA0MCTL = UCBRS1; // Modulation UCBRSx = 1
+    UCA0CTL1 |= UCSSEL_2;   // UART Clock -> SMCLK
+    UCA0BR0 = 8;            // 1MHz / 115200 baud rate = 8
+    UCA0BR1 = 0;            // 1MHz / 115200 baud rate = 8
+    UCA0MCTL = UCBRS1;      // Modulation UCBRSx = 1
     /* Take UCA0 out of reset */
-    UCA0CTL1 &= ~UCSWRST; // **Initialize USCI state machine**
-    IE2 |= UCA0RXIE; //Enable USCI_A0 RX interrupt
+    UCA0CTL1 &= ~UCSWRST;   // **Initialize USCI state machine**
+    IE2 |= UCA0RXIE;        //Enable USCI_A0 RX interrupt
 
 }
 
@@ -72,15 +65,15 @@ __interrupt void PORT1_ISR(void) // interrupt service routine
 __interrupt void USCI0RX_ISR(void)
 {
 // Detect if 'U' is sent, also necessary because rx gets a constant state
-//     if (UCA0RXBUF == 0x8A || UCA0RXBUF == 0x6A || UCA0RXBUF == 'U' || UCA0RXBUF == 'L') // 'U' ascii = 0x55 hex. both work
-    if (UCA0RXBUF >= 0x01)
+//    if (UCA0RXBUF >= 0x01) // Used for Live Demo since UART codes wasn't working
+    if (UCA0RXBUF == 0x8A || UCA0RXBUF == 0x6A || UCA0RXBUF == 'U' || UCA0RXBUF == 'L') // 'U' ascii = 0x55 hex. both work
     {
-         unlockDoor();
+        while (!(IFG2&UCA0TXIFG));          // Check if TX is ongoing
+        UCA0TXBUF = 0x00;          // TX -> Received Char + 1
+        unlockDoor();
      }
-     //    while (!(IFG2&UCA0TXIFG));          // Check if TX is ongoing
-     //    UCA0TXBUF = 0x00;          // TX -> Received Char + 1
 
-    // interrupt automatically clears
+    // RX interrupt automatically clears
 }
 
 void unlockDoor(void)
@@ -92,7 +85,7 @@ void unlockDoor(void)
     
     P1OUT ^= EMLOCK; // toggle LED
     __delay_cycles(1500000); // 1,500,000 = 1.5s
-//    __delay_cycles(10000000); // 15,500,000 15.5s
+//    __delay_cycles(15500000); // 15,500,000 15.5s
     
     UCA0TXBUF = 0x31; // ascii 1
     while(!(UCA0TXIFG & UC0IFG)); // waits for it to be transmitted. time to transmit number until changing register value (wont send number twice or skip anything)

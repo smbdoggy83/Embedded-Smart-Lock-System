@@ -1,6 +1,6 @@
 
-% This script flips the signal of the door, whatever it is
-% if 0, turn to 1, if 1, turn to 0
+% This script flips the signal of the door
+% if DOOR = ON, turn OFF, and if DOOR = OFF, turn ON
 data = thingSpeakRead(1563202)
 
 if (data(1) == 1)
